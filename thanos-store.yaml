@@ -86,7 +86,7 @@ data:
     config:
       bucket: prom-thanos-store
       endpoint: s3.us-east-2.amazonaws.com
-      access_key: AKIAVHE5HZ6OSSODRKLK
-      secret_key: OAb0Fn6bzNGmGFTihRcYpi95yjHJywiSuZbAoweF
+      access_key: "Your account Access Key"
+      secret_key: "Your account secret key"
       encrypts: true
       max_retries: 0
