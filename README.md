@@ -7,6 +7,38 @@
 5. Install Thanos Querier service and deployment
 6. Create Thanos store
 
+**Introduction**
+
+    Thanos is a set of components that can be composed into a highly available metric system with unlimited storage capacity, which can be added seamlessly on top of existing Prometheus deployments.
+
+    Thanos leverages the Prometheus 2.0 storage format to cost-efficiently store historical metric data in any object storage while retaining fast query latencies. Additionally, it provides a global query view across all Prometheus installations and can merge data from Prometheus HA pairs on the fly..
+
+**Overview of Thanos**
+
+
+                       +--------------+                  +--------------+      +--------------+
+                       | Thanos       |----------------> | Thanos Store |      | Thanos       |
+                       | Query        |           |      | Gateway      |      | Compactor    |
+                       +--------------+           |      +--------------+      +--------------+
+                   push                           |             |                     |
++--------------+   alerts   +--------------+      |             | storages            | Downsample &
+| Alertmanager | <----------| Thanos       | <----|             | query metrics       | compact blocks
+| (*)          |            | Ruler        |      |             |                     |
++--------------+            +--------------+      |             \/                    |
+      ^                            |              |      +----------------+           |
+      | push alerts                +--------------|----> | MinIO&reg; (*) | <---------+
+      |                                           |      |                |
++------------------------------+                  |      +----------------+
+|+------------+  +------------+|                  |             ^
+|| Prometheus |->| Thanos     || <----------------+             |
+|| (*)        |<-| Sidecar (*)||    query                       | inspect
+|+------------+  +------------+|    metrics                     | blocks
++------------------------------+                                |
+                                                         +--------------+
+                                                         | Thanos       |
+                                                         | Bucket Web   |
+                                                         +--------------+
+
 
 **1. Create S3 Bucket (I created prom-thanos-store)**
 
