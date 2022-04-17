@@ -64,6 +64,8 @@ aws s3api create-bucket --bucket prom-thanos-store --region us-east-2 --create-b
 
 **4. Install prometheus with thanos sidecar.**
 
+The [thanos sidecar](https://thanos.io/tip/components/sidecar.md/) command runs a component that gets deployed along with a Prometheus instance. This allows sidecar to optionally upload metrics to object storage and allow Queriers to query Prometheus data with common, efficient StoreAPI.
+
 **These are the changes which we need to add to add thanos sidecar to the prometheus.**
 
     thanos:         # add Thanos Sidecar
@@ -127,8 +129,23 @@ aws s3api create-bucket --bucket prom-thanos-store --region us-east-2 --create-b
     
 **5. Install Thanos Querier service and deployment**
 
+
+The thanos query command (also known as “Querier”) implements the Prometheus HTTP v1 API to query data in a Thanos cluster via PromQL.
+
+In short, it gathers the data needed to evaluate the query from underlying [StoreAPIs](https://github.com/thanos-io/thanos/blob/main/pkg/store/storepb/rpc.proto), evaluates the query and returns the result.
+
+Querier is fully stateless and horizontally scalable.
+
+
     kubectl apply -f querier-service.yaml 
     kubectl apply -f querier-deployment.yaml
+    
+**6. Create Thanos store**
+
+[StoreAPI](https://thanos.io/tip/thanos/integrations.md/#storeapi) is a common proto interface for gRPC component that can connect to Querier in order to fetch the metric series. Natively Thanos implements Sidecar (local Prometheus data), Ruler and Store gateway. This solves fetching series from Prometheus or Prometheus TSDB format, however same interface can be used to fetch metrics from other storages.
+    
+The [thanos store](https://thanos.io/tip/components/store.md/) command (also known as Store Gateway) implements the Store API on top of historical data in an object storage bucket. It acts primarily as an API gateway and therefore does not need significant amounts of local disk space. It joins a Thanos cluster on startup and advertises the data it can access. It keeps a small amount of information about all remote blocks on local disk and keeps it in sync with the bucket. This data is generally safe to delete across restarts at the cost of increased startup times.
+
     kubectl apply -f thanos-store.yaml 
 
 
