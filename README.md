@@ -184,3 +184,7 @@ aws s3api create-bucket --bucket prom-thanos-store --region us-east-2 --create-b
  <img width="1217" alt="image" src="https://user-images.githubusercontent.com/74225291/163675531-566cf351-d3e4-4ed7-9906-d595b0e3e2c9.png">
 
 
+You can try sample demo on Katacoda as well: 
+
+https://katacoda.com/bwplotka/courses/thanos
+
