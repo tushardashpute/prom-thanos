@@ -15,8 +15,7 @@ Thanos leverages the Prometheus 2.0 storage format to cost-efficiently store his
 
 **Overview of Thanos**
 
-
-https://camo.githubusercontent.com/4720f0b558ad470b8b73a6e459bac133bef772c92f96e4f327ae303e21254fbd/68747470733a2f2f646f63732e676f6f676c652e636f6d2f64726177696e67732f642f652f32504143582d31765442464b4b6766385944496e4a7952616b504538655a5a67397068546c4f734242326f674e6b4676684e47625a385944767a5f63474d6278575a42473147366870735166535831343546705963762f7075623f773d39363026683d373230
+![image](https://user-images.githubusercontent.com/74225291/163700782-87308d4e-353a-4413-b567-ff73adf5a7fb.png)
 
 
                                        +--------------+                  +--------------+      +--------------+
