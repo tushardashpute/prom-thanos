@@ -68,6 +68,7 @@ The [thanos sidecar](https://thanos.io/tip/components/sidecar.md/) command runs 
 
 **These are the changes which we need to add to add thanos sidecar to the prometheus.**
 
+
     thanos:         # add Thanos Sidecar
       tag: v0.13.0   # a specific version of Thanos
       objectStorageConfig: # blob storage configuration to upload metrics 
@@ -75,11 +76,10 @@ The [thanos sidecar](https://thanos.io/tip/components/sidecar.md/) command runs 
         name: thanos-objstore-config
 
 
-    export prom_version=10.0.0
+export prom_version=10.0.0
 
     helm upgrade --install \
-    prom    \
-    prometheus-community/kube-prometheus-stack   \
+    prom prometheus-community/kube-prometheus-stack   \
     --version "${prom_version}"    \
     --namespace utilities   \
     --set nameOverride=prometheus-operator \
@@ -130,7 +130,7 @@ The [thanos sidecar](https://thanos.io/tip/components/sidecar.md/) command runs 
 **5. Install Thanos Querier service and deployment**
 
 
-The thanos query command (also known as “Querier”) implements the Prometheus HTTP v1 API to query data in a Thanos cluster via PromQL.
+The [thanos query](https://thanos.io/tip/components/query.md/) command (also known as “Querier”) implements the Prometheus HTTP v1 API to query data in a Thanos cluster via PromQL.
 
 In short, it gathers the data needed to evaluate the query from underlying [StoreAPIs](https://github.com/thanos-io/thanos/blob/main/pkg/store/storepb/rpc.proto), evaluates the query and returns the result.
 
