@@ -20,15 +20,15 @@ Thanos leverages the Prometheus 2.0 storage format to cost-efficiently store his
 
 Thanos is composed of several components: 
 
-Thanos Sidecar: The sidecar runs alongside Prometheus server to gather the metrics that are stored on disk. It’s composed of a StoreAPI and a Shipper, the shipper is responsible for sending the metrics to the object storage.
+**Thanos Sidecar:** The sidecar runs alongside Prometheus server to gather the metrics that are stored on disk. It’s composed of a StoreAPI and a Shipper, the shipper is responsible for sending the metrics to the object storage.
 
-Thanos Store Gateway: This component is responsible for querying the object storage and exposing a StoreAPI that is queried by the other components.
+**Thanos Store Gateway:** This component is responsible for querying the object storage and exposing a StoreAPI that is queried by the other components.
 
-Query Layer: Provides all the components required to query the Data, including the Web UI and the API.
+**Query Layer:** Provides all the components required to query the Data, including the Web UI and the API.
 
-Compactor: Reads from object storage and compacts the data that’s not compacted yet. It’s completely independent of the other components.
+**Compactor:** Reads from object storage and compacts the data that’s not compacted yet. It’s completely independent of the other components.
 
-Ruler: Provides the ruler API that is used to evaluate rules and alerts from the Prometheus Alertmanager.
+**Ruler:** Provides the ruler API that is used to evaluate rules and alerts from the Prometheus Alertmanager.
 
 
 
